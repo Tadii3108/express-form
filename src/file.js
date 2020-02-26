@@ -1,6 +1,5 @@
 const express = require('express');
 const file = express();
-//const router = express.Router();
 const body_parser = require('body-parser');
 const path = require('path');
 require('dotenv').config();
@@ -14,7 +13,7 @@ const getConnection = () => {
     password: "pass",
     /*port: 5432*/}
 };
-//getConnection();
+getConnection();
 
 tableName = 'visitors'
 const createTable = async(tableName) =>{
@@ -59,17 +58,17 @@ file.use(express.json());
 file.use(body_parser.urlencoded({ extended:true }));
 
 file.set('view engine', 'pug')
-file.set('./views/index.pug', path.join(__dirname, './views/index.pug'))
+file.set('./views', path.join(__dirname, './views'))
 
 file.get('/new_visit', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/form.html'));
+    res.sendFile(path.join(__dirname + '/src/form.html'));
 })
 
 file.post("/submit", (req, res) => {
     console.log(req.body)
     addNewVisitor(req.body.visitor_name, req.body.assistant, req.body.visitor_age, req.body.date_of_visit, req.body.time_of_visit, req.body.comments)
     if(!req.body)
-        throw new Error('request body cannot be empty')
+        throw new Error('bodies cannot be empty')
 
     res.render("file", {
         visitor_name : req.body.visitor_name
@@ -80,7 +79,8 @@ const server = file.listen(9000, ()=> {
     console.log('server is running at 127.0.0.1:9000')
 })
 
+server();
 createTable('visitors');
-//addNewVisitor();
+addNewVisitor('Kilarney Billard', 'Sir Billard', 67, '12/09/1998', '12:30', 'getting better');
 
-module.exports = server;
+//module.exports = server;

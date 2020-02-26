@@ -58,15 +58,15 @@ file.use(express.json());
 file.use(body_parser.urlencoded({ extended:true }));
 
 file.set('view engine', 'pug')
-file.set('./views', path.join(__dirname, './views'))
+file.set('./views', path.join(__dirname, './views'));
 
 file.get('/new_visit', function(req, res) {
-    res.sendFile(path.join(__dirname + '/src/form.html'));
+    res.sendFile(path.join(__dirname + '/form.html'));
 })
 
 file.post("/submit", (req, res) => {
     console.log(req.body)
-    addNewVisitor(req.body.visitor_name, req.body.assistant, req.body.visitor_age, req.body.date_of_visit, req.body.time_of_visit, req.body.comments)
+    addNewVisitor(req.body.visitor_name, req.body.assistant, req.body.visitor_age, req.body.date_of_visit, req.body.time_of_visit, req.body.comments);
     if(!req.body)
         throw new Error('bodies cannot be empty')
 
@@ -79,8 +79,6 @@ const server = file.listen(9000, ()=> {
     console.log('server is running at 127.0.0.1:9000')
 })
 
-server();
 createTable('visitors');
-addNewVisitor('Kilarney Billard', 'Sir Billard', 67, '12/09/1998', '12:30', 'getting better');
 
-//module.exports = server;
+module.exports = server;

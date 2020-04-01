@@ -36,12 +36,13 @@ const addNewVisitor = async(visitor_name, visitor_age, date_of_visit, time_of_vi
                 reject(error);
             }
             console.info("Visitor has been added!");
-            resolve(results.rows);
+            resolve(results);
         })
     });
 }
 
 //createTable('visitors')
+//addNewVisitor('Tadiwa', 21, '31/08/1999', '23:55', 'Dwayne "The Rock" Johnson', 'Smart!')
 
 module.exports = {
     createTable,

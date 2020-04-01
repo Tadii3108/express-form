@@ -17,7 +17,12 @@ app.get('/new_visit', (req, res) => {
 
 app.post("/submit", (req, res) => {
     console.log(req.body)
-    addNewVisitor(req.body.visitor_name, req.body.assistant, req.body.visitor_age, req.body.date_of_visit, req.body.time_of_visit, req.body.comments);
+    addNewVisitor(req.body.visitor_name, 
+        req.body.assistant, 
+        req.body.visitor_age, 
+        req.body.date_of_visit, 
+        req.body.time_of_visit, 
+        req.body.comments);
     if(!req.body)
         throw new Error('bodies cannot be empty')
 
